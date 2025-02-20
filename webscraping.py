@@ -6,6 +6,7 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 import time
 import pandas as pd
 
+#make a function to scrape startups
 def scrape_startups():
     startup_list = []  
     last_height = driver.execute_script("return document.body.scrollHeight")  # Get current page height
