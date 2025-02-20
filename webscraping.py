@@ -6,12 +6,11 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 import time
 import pandas as pd
 
-#make a function to scrape startups
 def scrape_startups():
     startup_list = []  
     last_height = driver.execute_script("return document.body.scrollHeight")  # Get current page height
 
-    # Wait for startups to load
+    # Wait for startups to load (20s)
     try:
         WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, '.result-card.startup')))
     except TimeoutException:
@@ -76,11 +75,11 @@ except Exception as e:
 
 driver.quit()
 
-df = pd.DataFrame(startups)
+df = pd.DataFrame(startups) #make df of startups
 print(df.head())
 
 startups[0]
 
-df_cleaned = df.replace(r'<\/?td>', '', regex=True)
+df_cleaned = df.replace(r'<\/?td>', '', regex=True) #using regex to remove HTML tags and clean data
 df_cleaned.to_excel('startups_scrape_1902.xlsx', index=False)
 df_cleaned
